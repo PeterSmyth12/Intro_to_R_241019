@@ -1,0 +1,556 @@
+<!DOCTYPE html><html><head>
+      <title>06-statistical-Methods</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css">
+      
+      
+
+      
+      
+      
+      
+      
+      
+
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <h1 class="mume-header" id="introduction-to-statistical-methods-with-r">Introduction to Statistical Methods with R</h1>
+
+<p>In this session we will look at a couple of statistical methods namely; Linear Regression and Decision trees.</p>
+<p>These are examples only using the builtin datasets which accompany all R installations. As far a s possible we will not deal with any of the mathematics or theory of these techniques, rather we will simply build up examples and provide indications of R functions available to analyse the resulting models with a view t deciding how &apos;good&apos; they are.</p>
+<h2 class="mume-header" id="rs-builtin-datasets-and-other-sources">R&apos;s builtin datasets and other sources</h2>
+
+<p>You can get a list of the builtin datasets in R by typing the following command into the console</p>
+<pre data-role="codeBlock" data-info="r" class="language-r">datasets<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</pre><p>The start of the output looks like this.</p>
+<p><img src="./fig/datasets.png" alt="R builtin datasets"></p>
+<p>There are about 50 of them.</p>
+<p>There are seveeral online repositories which hold large collectins of open source (free to use, with appropriate citation) datasets. Two of the more popular are;</p>
+<p><a href="https://www.kaggle.com/datasets">Kaggle</a><br>
+and<br>
+<a href="https://archive.ics.uci.edu/ml/datasets.php">UCI Machine Learning Repository</a></p>
+<h2 class="mume-header" id="linear-regression">Linear Regression</h2>
+
+<p>In linear regression we are going to try to predict values for a dependent variable, usually referred to as <code>y</code> based on the values of a set of predictor or independent variables denoted by the <code>x</code>s. the <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>&#x3B2;</mi></mrow><annotation encoding="application/x-tex">\beta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05278em;">&#x3B2;</span></span></span></span>&apos;s represent &apos;weightings&apos; on the x values which have been determined by the creation of the model. The <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>&#x3F5;</mi></mrow><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">&#x3F5;</span></span></span></span> represents the error.</p>
+<p>The general equation of the regression model can be written like this</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>y</mi><mi>i</mi></msub><mo>=</mo><msub><mi>&#x3B2;</mi><mn>0</mn></msub><mo>+</mo><msub><mi>&#x3B2;</mi><mn>1</mn></msub><msub><mi>x</mi><mrow><mi>i</mi><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>&#x3B2;</mi><mn>2</mn></msub><msub><mi>x</mi><mrow><mi>i</mi><mn>2</mn></mrow></msub><mo>+</mo><msub><mi>&#x3B2;</mi><mn>3</mn></msub><msub><mi>x</mi><mrow><mi>i</mi><mn>3</mn></mrow></msub><mo>+</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo>+</mo><msub><mi>&#x3B2;</mi><mi>p</mi></msub><msub><mi>x</mi><mrow><mi>i</mi><mi>p</mi></mrow></msub><mo>+</mo><mi>&#x3F5;</mi></mrow><annotation encoding="application/x-tex">{y_i} = \beta_{0} + \beta_{1} x_{i1} + \beta_{2}  x_{i2} + \beta_{3}  x_{i3} + ... + \beta_{p}  x_{ip} +  \epsilon    
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">&#x3B2;</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">0</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">&#x3B2;</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">&#x3B2;</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">&#x3B2;</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mord mtight">3</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.980548em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">&#x3B2;</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:-0.05278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">p</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">p</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">&#x3F5;</span></span></span></span></span></p><p>In this equation i = 1..n and is the numbers of observations used to generate the model and <code>p</code> is the number of predictors or independent variables. <code>y</code> is the dependent variable that we are hoping to predict.</p>
+<p>In the simplest form of (perfect) linear regression, where we are trying to predict <code>y</code> on the values of a single predictor <code>x</code> we can simplfy the equation to;</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi><mo>=</mo><mi>&#x3B2;</mi><mo>+</mo><msub><mi>&#x3B2;</mi><mn>1</mn></msub><mi>x</mi><mo>+</mo><mi>&#x3F5;</mi></mrow><annotation encoding="application/x-tex">{y} = \beta + \beta_{1} x  + \epsilon
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05278em;">&#x3B2;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">&#x3B2;</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">&#x3F5;</span></span></span></span></span></p><p>This you might recognise as the equation of a straight line in a 2-dimensional plane.<br>
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>&#x3B2;</mi></mrow><annotation encoding="application/x-tex">\beta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05278em;">&#x3B2;</span></span></span></span> represents the intercept, i.e the value of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span></span> when <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> is 0 and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>&#x3B2;</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">\beta_{1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">&#x3B2;</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> represents the gradient or slope of the line.</p>
+<h2 class="mume-header" id="a-perfect-model">A perfect model</h2>
+
+<p>We are going to start by making a perfect simple model. We can do this because there are many relationships for which we know  by definition the relationship between the dependent and independent variables.</p>
+<p>For example the relationship between a temperature recorded in Fahrenheit and the same temperature recorded in Centigrade.</p>
+<p>Our equation</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi><mo>=</mo><mi>&#x3B2;</mi><mo>+</mo><msub><mi>&#x3B2;</mi><mn>1</mn></msub><mi>x</mi><mo>+</mo><mi>&#x3F5;</mi></mrow><annotation encoding="application/x-tex">{y} = \beta + \beta_{1} x  + \epsilon
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05278em;">&#x3B2;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">&#x3B2;</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">&#x3F5;</span></span></span></span></span></p><p>becomes</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>F</mi><mo>=</mo><mn>32</mn><mo>+</mo><mn>1.8</mn><mo>&#x2217;</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">F = 32 + 1.8*C
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">3</span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">.</span><span class="mord">8</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#x2217;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span></span></span></span></span></p><p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>&#x3F5;</mi></mrow><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">&#x3F5;</span></span></span></span> in this case is 0. There is no error or uncertainty. We have an exact equation.</p>
+<p>Using our equation we can generate some data</p>
+<pre data-role="codeBlock" data-info="r" class="language-r"><span class="token comment"># start with generating 1000 random numbers between -10 and 100</span>
+set.seed<span class="token punctuation">(</span><span class="token number">42</span><span class="token punctuation">)</span>
+centigrade <span class="token operator">&lt;-</span> runif<span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span>
+
+<span class="token comment"># ramdonly select 100</span>
+set.seed<span class="token punctuation">(</span><span class="token number">42</span><span class="token punctuation">)</span>
+centigrade_selection <span class="token operator">=</span> sample<span class="token punctuation">(</span>centigrade<span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span>
+
+<span class="token comment"># convert the centigrade values to fahrenheit</span>
+fahrenheit_selection <span class="token operator">&lt;-</span> <span class="token number">32</span> <span class="token operator">+</span> <span class="token number">1.8</span><span class="token operator">*</span>centigrade_selection
+</pre><p>&lt;&lt;&lt;&lt;  Add exercise to plot to show distribution&gt;&gt;&gt;&gt;</p>
+<p>The above code uses some functions that we have not seen before.</p>
+<ul>
+<li>
+<p><strong><code>runif()</code></strong> creates a vector of real numbers between given limits. In our case we have generated a vector with 1000 element in it all of whose values are betwwen -10 and 100. <br> There is a similar <code>rnorm()</code> function which will generate normally distributed values. In the call you specify, the number of values and the mean and std. deviation values to use. A typical call might be<code>rnorm(100, 0, 1)</code>.</p>
+</li>
+<li>
+<p><strong><code>set.seed()</code></strong> creates a starting point for random number generation.</p>
+</li>
+<li>
+<p><strong><code>sample()</code></strong> as the name suggests will extract a sample of entries. in our case 100 elements from the centigrade vector. <code>sample</code> has another parameter <code>replace</code> which allows you to specify that a selected element should (<code>replace=TRUE</code>) be allowed to be selected again, or not (<code>replace=FALSE</code>). The default is <code>replace=FALSE</code> which is what we would want in this case.</p>
+</li>
+</ul>
+<blockquote>
+<h3>Sampling dataframes</h3>
+<p>Although there are times when you want to sample from a vector, it far more likely that you will want to sample from a dataframe. There are two ways of doing this. Using the SAFI_clean dataset we have demonstrated them in the code below.</p>
+</blockquote>
+<blockquote>
+<pre data-role="codeBlock" data-info="r" class="language-r">library<span class="token punctuation">(</span>tidyverse<span class="token punctuation">)</span>
+interviews <span class="token operator">&lt;-</span> read_csv<span class="token punctuation">(</span><span class="token string">&quot;data/SAFI_clean.csv&quot;</span><span class="token punctuation">,</span> na <span class="token operator">=</span> <span class="token string">&quot;NULL&quot;</span><span class="token punctuation">)</span>
+</pre></blockquote>
+<blockquote>
+<p>#  to select rows from a dataframe</p>
+<p>#  nrow(interviews)<br>
+#  str(nrow(interviews))<br>
+# sample(nrow(interviews), 3)<br>
+# str(sample(nrow(interviews), 3))</p>
+<p>sample_1_interviews &lt;- interviews[sample(nrow(interviews), 3), ]</p>
+<p># a simpler way is to use the dplyr function sample_n()</p>
+<p>sample_2_interviews &lt;- sample_n(interviews, 3)</p>
+<pre data-role="codeBlock" data-info class="language-"><code></code></pre></blockquote>
+<p>we are now in a position to plot our data. In the firat instance we will use the R builtin <code>plot</code> function</p>
+<pre data-role="codeBlock" data-info="r" class="language-r">plot<span class="token punctuation">(</span>centigrade_selection<span class="token punctuation">,</span> fahrenheit_selection<span class="token punctuation">)</span>
+</pre><p>Unsurprisingly we get a very neat looking graph</p>
+<p><img src="fig%5CFC_plot1.png" alt="FC Plot 1"></p>
+<p>Now we will do the same again but this time using <code>ggplot</code>. In order to use <code>ggplot</code> we will first have to convert our two vectors into a dataframe. We can do that using the <code>dta.frame</code> function.</p>
+<pre data-role="codeBlock" data-info="r" class="language-r"><span class="token comment"># Create a dataframe of our data</span>
+
+df_temps <span class="token operator">&lt;-</span> data.frame<span class="token punctuation">(</span>y<span class="token operator">=</span>fahrenheit_selection<span class="token punctuation">,</span> x<span class="token operator">=</span>centigrade_selection<span class="token punctuation">)</span>
+
+<span class="token comment"># now use ggplot2</span>
+
+library<span class="token punctuation">(</span>ggplot2<span class="token punctuation">)</span>
+
+ggplot<span class="token punctuation">(</span>df_temps<span class="token punctuation">,</span> aes<span class="token punctuation">(</span>x<span class="token operator">=</span>x<span class="token punctuation">,</span> y<span class="token operator">=</span>y<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> 
+  geom_point<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span>
+  geom_line<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+</pre><p><img src="fig%5CFC_plot2.png" alt="FC Plot 1"></p>
+<p><code>geom_line</code> draws lines between adjacent points. The fact that we have what appears to be a <em>best fit</em> line through all of the points, and they all lie on the line, is simply a reflection that we started with perfect data.</p>
+<p><code>ggplot</code> also allows us to plot a <em>best fit</em> line using the <code>geom_smooth</code> function. We need to tell <code>geom_smooth</code> how we want the line to be drawn, and in our case we want it to draw the line that results from creating a <em>linear model</em> of the data.</p>
+<pre data-role="codeBlock" data-info="r" class="language-r">ggplot<span class="token punctuation">(</span>df_temps<span class="token punctuation">,</span> aes<span class="token punctuation">(</span>x<span class="token operator">=</span>x<span class="token punctuation">,</span> y<span class="token operator">=</span>y<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> 
+  geom_point<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span>
+  geom_smooth<span class="token punctuation">(</span>method<span class="token operator">=</span><span class="token string">&apos;lm&apos;</span><span class="token punctuation">,</span>formula<span class="token operator">=</span>y<span class="token operator">~</span>x<span class="token punctuation">)</span>
+</pre><p><img src="fig%5CFC_plot3.png" alt="FC Plot 1"></p>
+<p>Apart from the colour, the plots certainly look identical.</p>
+<p>We can use the <code>lm</code> function outside of <code>ggplot</code></p>
+<pre data-role="codeBlock" data-info="r" class="language-r"><span class="token comment"># create a model and see what it looks like</span>
+model <span class="token operator">&lt;-</span> lm<span class="token punctuation">(</span>y<span class="token operator">~</span>x<span class="token punctuation">,</span> data<span class="token operator">=</span>df_temps<span class="token punctuation">)</span>
+summary<span class="token punctuation">(</span>model<span class="token punctuation">)</span>
+</pre><p><strong>Output from <code>summary</code></strong></p>
+<p><img src="fig%5Csummary1.jpg" alt="FC Plot 1"></p>
+<p>In the <code>lm</code> function, the <code>data</code> parameter is used to specify the dataframe containing the data and the first parameter, which is called <code>formula</code> but is rarely written as the formula is always specified first, contains and expression representing the dependent and independent variables to be used.</p>
+<p>The dependent variable is specified first, and there will only be one of them and then after the <code>~</code> character we specified the independent variables that we want to be included in the model. In our case we only had the possibility of one (x), but in more realistic cases we would list the independent variable of interest by using the <code>+</code> operator. e.g. <code>y ~ x + a + b + c</code>. If we wanted to include all of the variables in the dataframe, we could use the shorthand notation of <code>.</code> <a href="http://e.eg">e.eg</a>. <code>y ~ .</code>.</p>
+<p>In more realistic scenarios, it may be that you want to include some interaction variables, (algerbraic combinations of existing variables) into your model. In these cases, you could create the interaction terms as ne variable in the data frame in advance, or you could specify them directly using the <code>I</code> function.</p>
+<p>Here is a silly example using our limited data frame.</p>
+<pre data-role="codeBlock" data-info="r" class="language-r"><span class="token comment"># create a model and see what it looks like</span>
+model <span class="token operator">&lt;-</span> lm<span class="token punctuation">(</span>y<span class="token operator">~</span>x <span class="token operator">+</span> I<span class="token punctuation">(</span>x<span class="token operator">*</span>x<span class="token punctuation">)</span> <span class="token operator">+</span> I<span class="token punctuation">(</span>log<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> data<span class="token operator">=</span>df_temps<span class="token punctuation">)</span>
+summary<span class="token punctuation">(</span>model<span class="token punctuation">)</span>
+</pre><p><strong>Output from <code>summary</code></strong></p>
+<p><img src="fig%5Csummary2.jpg" alt="FC Plot 1"></p>
+<h3 class="mume-header" id="the-summary-information">The summary information</h3>
+
+<p>The output from the summary function provides us with key information about the model which has been created.</p>
+<p>The information includes;</p>
+<ul>
+<li>the equation of the model in the form of a list of the variables (the <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span>&apos;s) and the &apos;estimates&apos; of the <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>&#x3B2;</mi></mrow><annotation encoding="application/x-tex">\beta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05278em;">&#x3B2;</span></span></span></span>&apos;s.</li>
+<li>the Adjusted R-squared value (the closer to 1 the better)</li>
+<li>the overall p-value (want as low as possible)</li>
+<li>individual p-values for the variables (&lt;0.05 required to be considered significant)</li>
+<li>details of the residuals</li>
+</ul>
+<p>A detailed description of each of the areas in the summary output can be found at this webpage <a href="http://www.learnbymarketing.com/tutorials/explaining-the-lm-summary-in-r/">explaining-the-lm-summary-in-r</a></p>
+<h3 class="mume-header" id="residuals">Residuals</h3>
+
+<p>We saw in the <code>summary</code> infomation &apos;summary&apos; information relating to the residual values from th model. There will be one value for each of our 100 &apos;observations&apos;. These represent the individual <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>&#x3F5;</mi></mrow><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">&#x3F5;</span></span></span></span> values in our original equation.</p>
+<p>We can extract the complete vector of residuals from the model object with the following code.</p>
+<pre data-role="codeBlock" data-info="r" class="language-r"><span class="token comment"># get the residuals</span>
+residuals <span class="token operator">&lt;-</span> resid<span class="token punctuation">(</span>model<span class="token punctuation">)</span>
+</pre><p>We can now create a dataframe of the residuals and the original dependent variable values and plot them in a scatter plot.</p>
+<pre data-role="codeBlock" data-info="r" class="language-r">ggplot<span class="token punctuation">(</span>df_resid<span class="token punctuation">,</span> aes<span class="token punctuation">(</span>x<span class="token operator">=</span>dependent_variable<span class="token punctuation">,</span> y<span class="token operator">=</span>Residuals<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> 
+  geom_point<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span>
+  geom_hline<span class="token punctuation">(</span>yintercept<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> colour<span class="token operator">=</span><span class="token string">&apos;blue&apos;</span><span class="token punctuation">)</span> <span class="token operator">+</span>
+  scale_y_continuous<span class="token punctuation">(</span>limits <span class="token operator">=</span> c<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment">#  scale_y_continuous(limits = c(-2.0e-13, 2.0e-13))</span>
+</pre><p><img src="fig%5Cresids1.png" alt="Residuals 1"></p>
+<p>In this plot we explicitly specified the range of the y-axis. The result is that all of the residuals appear to be 0, which given our <code>perfect</code> relationship is what we would expect. But we already know from the summary information that this isn&apos;t the case.</p>
+<h2 class="mume-header" id="exercise">Exercise</h2>
+
+<p>Change the y-axis scale to the commented out line above and see what the plot looks like.</p>
+<p>Even though we started with a perfect set of data, our model has introduced errors in the predicted values of the dependent variable, albeit in this case extremely small.</p>
+<p><img src="fig%5Cresids1ex.png" alt="Residuals 1"></p>
+<h2 class="mume-header" id="breaking-our-model">Breaking our model</h2>
+
+<p>Now that we know what a perfect model looks like, we are going to break it slightly.</p>
+<p>To do this we are going to introduce random variations if the predicted values of the dependent variable (fahrenheit_selection) everything else will remain the same.</p>
+<pre data-role="codeBlock" data-info="r" class="language-r"><span class="token comment"># add some noise to the data</span>
+fahrenheit_selection <span class="token operator">&lt;-</span> <span class="token punctuation">(</span><span class="token number">32</span> <span class="token operator">+</span> runif<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token number">1.8</span><span class="token operator">*</span>centigrade_selection <span class="token operator">+</span>runif<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">1.8</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token operator">+</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">1.8</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+df_temps2 <span class="token operator">&lt;-</span> data.frame<span class="token punctuation">(</span>y<span class="token operator">=</span>fahrenheit_selection<span class="token punctuation">,</span> x<span class="token operator">=</span>centigrade_selection<span class="token punctuation">)</span>
+ 
+<span class="token comment"># and plot the results</span>
+ggplot<span class="token punctuation">(</span>df_temps2<span class="token punctuation">,</span> aes<span class="token punctuation">(</span>x<span class="token operator">=</span>x<span class="token punctuation">,</span> y<span class="token operator">=</span>y<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> 
+  geom_point<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span>
+  geom_line<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</pre><p><img src="fig%5CFC_plot4.png" alt="FC_plot4"></p>
+<p>This time the  line is not so straight! So, we need to we need to add a regression line produced from <code>geom_smooth</code> as we did before.</p>
+<pre data-role="codeBlock" data-info="r" class="language-r">ggplot<span class="token punctuation">(</span>df_temps2<span class="token punctuation">,</span> aes<span class="token punctuation">(</span>x<span class="token operator">=</span>x<span class="token punctuation">,</span> y<span class="token operator">=</span>y<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> 
+  geom_point<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span>
+  geom_smooth<span class="token punctuation">(</span>method<span class="token operator">=</span><span class="token string">&apos;lm&apos;</span><span class="token punctuation">,</span>formula<span class="token operator">=</span>y<span class="token operator">~</span>x<span class="token punctuation">)</span>
+</pre><p><img src="fig%5CFC_plot5.png" alt="FC_plot5"></p>
+<p>Notice that in addition to the line itself, we also get a shaded area representing the 95% confidence level. You can control this with parameter settings if you want.</p>
+<p>Now we want to create a new model and look at the summary information</p>
+<pre data-role="codeBlock" data-info="r" class="language-r"><span class="token comment"># create a new model and see what it looks like</span>
+model2 <span class="token operator">&lt;-</span> lm<span class="token punctuation">(</span>y<span class="token operator">~</span>x<span class="token punctuation">,</span> data<span class="token operator">=</span>df_temps2<span class="token punctuation">)</span>
+summary<span class="token punctuation">(</span>model2<span class="token punctuation">)</span>
+</pre><pre data-role="codeBlock" data-info class="language-"><code>Call:
+lm(formula = y ~ x, data = df_temps2)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-17.0735  -6.9549  -0.7982   6.6247  17.3182 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 29.27385    1.45258   20.15   &lt;2e-16 ***
+x            1.84999    0.02458   75.27   &lt;2e-16 ***
+---
+Signif. codes:  0 &#x2018;***&#x2019; 0.001 &#x2018;**&#x2019; 0.01 &#x2018;*&#x2019; 0.05 &#x2018;.&#x2019; 0.1 &#x2018; &#x2019; 1
+
+Residual standard error: 8.229 on 98 degrees of freedom
+Multiple R-squared:  0.983,	Adjusted R-squared:  0.9828 
+F-statistic:  5666 on 1 and 98 DF,  p-value: &lt; 2.2e-16
+</code></pre><p>The adjusted R-squared value is still very high, but given that we know what the &apos;perfect&apos; model should be we can tell from the estimates of the Intercept and &apos;x&apos; that the model has changed somewhat. But remember, in real life we have no idea what the estimates should be.</p>
+<p>We can also plot the residuals as before.</p>
+<pre data-role="codeBlock" data-info="r" class="language-r">residuals2 <span class="token operator">&lt;-</span> resid<span class="token punctuation">(</span>model2<span class="token punctuation">)</span>
+
+df_resid2 <span class="token operator">&lt;-</span> data.frame<span class="token punctuation">(</span>Residuals<span class="token operator">=</span>residuals2<span class="token punctuation">,</span> dependent_variable<span class="token operator">=</span>fahrenheit_selection<span class="token punctuation">)</span>
+<span class="token comment">#plot(fahrenheit_selection, residuals)</span>
+<span class="token comment">#abline(0,0)</span>
+
+ggplot<span class="token punctuation">(</span>df_resid2<span class="token punctuation">,</span> aes<span class="token punctuation">(</span>x<span class="token operator">=</span>dependent_variable<span class="token punctuation">,</span> y<span class="token operator">=</span>Residuals<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> 
+  geom_point<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span>
+  geom_hline<span class="token punctuation">(</span>yintercept<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> colour<span class="token operator">=</span><span class="token string">&apos;blue&apos;</span><span class="token punctuation">)</span> 
+
+</pre><p><img src="fig%5Cresids2.png" alt="resids2"></p>
+<p>This is type of residual plot we are hoping for. The points evenly but randomly distributed either side of the 0-line.</p>
+<h2 class="mume-header" id="exercise-1">Exercise</h2>
+
+<p>Can you break the model to such an extent that the 	Adjusted R-squared is about 0.7 ?  What does the regression and residual plots look like?</p>
+<h2 class="mume-header" id="breaking-the-model-again">Breaking the model again</h2>
+
+<p>In the previous example we altered our model by adding linear randomness to both the intercept and the <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>&#x3B2;</mi></mrow><annotation encoding="application/x-tex">\beta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05278em;">&#x3B2;</span></span></span></span> value. This time we are going to add a multiplicative ramdomness to the <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>&#x3B2;</mi></mrow><annotation encoding="application/x-tex">\beta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05278em;">&#x3B2;</span></span></span></span> value.  The only difference to the code is that a <code>+</code> becomes a <code>*</code>.</p>
+<pre data-role="codeBlock" data-info="r" class="language-r">fahrenheit_selection <span class="token operator">&lt;-</span> <span class="token punctuation">(</span><span class="token number">32</span> <span class="token operator">+</span> runif<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token number">1.8</span><span class="token operator">*</span>centigrade_selection <span class="token operator">*</span>runif<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">0.8</span><span class="token punctuation">,</span> <span class="token number">1.2</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+df_temps3 <span class="token operator">&lt;-</span> data.frame<span class="token punctuation">(</span>y<span class="token operator">=</span>fahrenheit_selection<span class="token punctuation">,</span> x<span class="token operator">=</span>centigrade_selection<span class="token punctuation">)</span>
+
+
+ggplot<span class="token punctuation">(</span>df_temps3<span class="token punctuation">,</span> aes<span class="token punctuation">(</span>x<span class="token operator">=</span>x<span class="token punctuation">,</span> y<span class="token operator">=</span>y<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> 
+  geom_point<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span>
+  geom_smooth<span class="token punctuation">(</span>method<span class="token operator">=</span><span class="token string">&apos;lm&apos;</span><span class="token punctuation">,</span>formula<span class="token operator">=</span>y<span class="token operator">~</span>x<span class="token punctuation">)</span> 
+
+<span class="token comment"># Now create the real model to examine various aspects of it.</span>
+
+<span class="token comment"># create a model and see what it looks like</span>
+model3 <span class="token operator">&lt;-</span> lm<span class="token punctuation">(</span>y<span class="token operator">~</span>x<span class="token punctuation">,</span> data<span class="token operator">=</span>df_temps3<span class="token punctuation">)</span>
+summary<span class="token punctuation">(</span>model3<span class="token punctuation">)</span>
+
+residuals3 <span class="token operator">&lt;-</span> resid<span class="token punctuation">(</span>model3<span class="token punctuation">)</span>
+
+df_resid3 <span class="token operator">&lt;-</span> data.frame<span class="token punctuation">(</span>Residuals<span class="token operator">=</span>residuals3<span class="token punctuation">,</span> dependent_variable<span class="token operator">=</span>fahrenheit_selection<span class="token punctuation">)</span>
+<span class="token comment">#plot(fahrenheit_selection, residuals)</span>
+<span class="token comment">#abline(0,0)</span>
+
+ggplot<span class="token punctuation">(</span>df_resid3<span class="token punctuation">,</span> aes<span class="token punctuation">(</span>x<span class="token operator">=</span>dependent_variable<span class="token punctuation">,</span> y<span class="token operator">=</span>Residuals<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> 
+  geom_point<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span>
+  geom_hline<span class="token punctuation">(</span>yintercept<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> colour<span class="token operator">=</span><span class="token string">&apos;blue&apos;</span><span class="token punctuation">)</span> 
+</pre><p>If we look at the summary information first</p>
+<pre data-role="codeBlock" data-info class="language-"><code>Call:
+lm(formula = y ~ x, data = df_temps3)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-31.952  -8.778  -0.618   8.483  28.308 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 32.80811    2.30008   14.26   &lt;2e-16 ***
+x            1.81673    0.03892   46.68   &lt;2e-16 ***
+---
+Signif. codes:  0 &#x2018;***&#x2019; 0.001 &#x2018;**&#x2019; 0.01 &#x2018;*&#x2019; 0.05 &#x2018;.&#x2019; 0.1 &#x2018; &#x2019; 1
+
+Residual standard error: 13.03 on 98 degrees of freedom
+Multiple R-squared:  0.957,	Adjusted R-squared:  0.9565 
+F-statistic:  2179 on 1 and 98 DF,  p-value: &lt; 2.2e-16
+</code></pre><p>The model looks pretty good.</p>
+<p>Now lets look at the plots.</p>
+<p><img src="fig%5CFC_plot6.png" alt="FC_pot6"></p>
+<p>If you look at this plot carefully , you will notice that as x (and hence y) increases, then the points are a greater distance from the line. The is known as Homoscedasticity and is to be avoided in models.</p>
+<p>If you look at the residuals plot the effect is equally noticeable.</p>
+<p><img src="fig%5Cresids3.png" alt="resids3"></p>
+<p>The point ot be made here is that the first graph can only be shown because we have the trivial case of a single independent variable. If you had two, you might try a 3-d graph, but spotting Homoscedasticity in it could be difficult. For 3 or more independent variables, you wouldn&apos;t be able to draw a graph at all.</p>
+<p>Hover, regardless of the number of independent variables, you will always be able to produce the residuals graph.</p>
+<p>non-Homoscedasticity is in fact just one of several assumption that we need to make when dealing with linear regression models. The complete list include;</p>
+<ol>
+<li>
+<p>Linear Relationship : Linear regression needs a linear relationship between the dependent and independent variables.</p>
+</li>
+<li>
+<p>Normality of Residual : Linear regression requires residuals should be normally distributed.</p>
+</li>
+<li>
+<p>Homoscedasticity :  Linear regression assumes that residuals are approximately equal for all predicted dependent variable values. In other words, it means constant variance of errors.</p>
+</li>
+<li>
+<p>No Outlier Problem</p>
+</li>
+<li>
+<p>Multicollinearity : It means there is a high correlation between independent variables. The linear regression model MUST NOT be faced with problem of multicollinearity.</p>
+</li>
+<li>
+<p>Independence of error terms - No Autocorrelation</p>
+</li>
+</ol>
+<p>(taken from: <a href="https://www.listendata.com/2015/09/linear-regression-with-r.html">https://www.listendata.com/2015/09/linear-regression-with-r.html</a>)</p>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
