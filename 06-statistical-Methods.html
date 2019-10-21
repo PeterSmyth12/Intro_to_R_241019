@@ -307,11 +307,10 @@ centigrade_selection <span class="token operator">=</span> sample<span class="to
 
 <span class="token comment"># convert the centigrade values to fahrenheit</span>
 fahrenheit_selection <span class="token operator">&lt;-</span> <span class="token number">32</span> <span class="token operator">+</span> <span class="token number">1.8</span><span class="token operator">*</span>centigrade_selection
-</pre><p>&lt;&lt;&lt;&lt;  Add exercise to plot to show distribution&gt;&gt;&gt;&gt;</p>
-<p>The above code uses some functions that we have not seen before.</p>
+</pre><p>The above code uses some functions that we have not seen before.</p>
 <ul>
 <li>
-<p><strong><code>runif()</code></strong> creates a vector of real numbers between given limits. In our case we have generated a vector with 1000 element in it all of whose values are betwwen -10 and 100. <br> There is a similar <code>rnorm()</code> function which will generate normally distributed values. In the call you specify, the number of values and the mean and std. deviation values to use. A typical call might be<code>rnorm(100, 0, 1)</code>.</p>
+<p><strong><code>runif()</code></strong> creates a vector of real numbers between given limits. In our case we have generated a vector with 1000 element in it all of whose values are between -10 and 100. <br> There is a similar <code>rnorm()</code> function which will generate normally distributed values. In the call you specify, the number of values and the mean and std. deviation values to use. A typical call might be<code>rnorm(100, 0, 1)</code>.</p>
 </li>
 <li>
 <p><strong><code>set.seed()</code></strong> creates a starting point for random number generation.</p>
@@ -341,7 +340,7 @@ interviews <span class="token operator">&lt;-</span> read_csv<span class="token 
 <p>we are now in a position to plot our data. In the firat instance we will use the R builtin <code>plot</code> function</p>
 <pre data-role="codeBlock" data-info="r" class="language-r">plot<span class="token punctuation">(</span>centigrade_selection<span class="token punctuation">,</span> fahrenheit_selection<span class="token punctuation">)</span>
 </pre><p>Unsurprisingly we get a very neat looking graph</p>
-<p><img src="fig%5CFC_plot1.png" alt="FC Plot 1"></p>
+<p><img src="./fig/FC_plot1.png" alt="FC Plot 1"></p>
 <p>Now we will do the same again but this time using <code>ggplot</code>. In order to use <code>ggplot</code> we will first have to convert our two vectors into a dataframe. We can do that using the <code>dta.frame</code> function.</p>
 <pre data-role="codeBlock" data-info="r" class="language-r"><span class="token comment"># Create a dataframe of our data</span>
 
@@ -355,20 +354,20 @@ ggplot<span class="token punctuation">(</span>df_temps<span class="token punctua
   geom_point<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span>
   geom_line<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-</pre><p><img src="fig%5CFC_plot2.png" alt="FC Plot 1"></p>
+</pre><p><img src="./fig/FC_plot2.png" alt="FC Plot 2"></p>
 <p><code>geom_line</code> draws lines between adjacent points. The fact that we have what appears to be a <em>best fit</em> line through all of the points, and they all lie on the line, is simply a reflection that we started with perfect data.</p>
 <p><code>ggplot</code> also allows us to plot a <em>best fit</em> line using the <code>geom_smooth</code> function. We need to tell <code>geom_smooth</code> how we want the line to be drawn, and in our case we want it to draw the line that results from creating a <em>linear model</em> of the data.</p>
 <pre data-role="codeBlock" data-info="r" class="language-r">ggplot<span class="token punctuation">(</span>df_temps<span class="token punctuation">,</span> aes<span class="token punctuation">(</span>x<span class="token operator">=</span>x<span class="token punctuation">,</span> y<span class="token operator">=</span>y<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> 
   geom_point<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span>
   geom_smooth<span class="token punctuation">(</span>method<span class="token operator">=</span><span class="token string">&apos;lm&apos;</span><span class="token punctuation">,</span>formula<span class="token operator">=</span>y<span class="token operator">~</span>x<span class="token punctuation">)</span>
-</pre><p><img src="fig%5CFC_plot3.png" alt="FC Plot 1"></p>
+</pre><p><img src="./fig/FC_plot3.png" alt="FC Plot 3"></p>
 <p>Apart from the colour, the plots certainly look identical.</p>
 <p>We can use the <code>lm</code> function outside of <code>ggplot</code></p>
 <pre data-role="codeBlock" data-info="r" class="language-r"><span class="token comment"># create a model and see what it looks like</span>
 model <span class="token operator">&lt;-</span> lm<span class="token punctuation">(</span>y<span class="token operator">~</span>x<span class="token punctuation">,</span> data<span class="token operator">=</span>df_temps<span class="token punctuation">)</span>
 summary<span class="token punctuation">(</span>model<span class="token punctuation">)</span>
 </pre><p><strong>Output from <code>summary</code></strong></p>
-<p><img src="fig%5Csummary1.jpg" alt="FC Plot 1"></p>
+<p><img src="./fig/summary1.jpg" alt="Summary 1"></p>
 <p>In the <code>lm</code> function, the <code>data</code> parameter is used to specify the dataframe containing the data and the first parameter, which is called <code>formula</code> but is rarely written as the formula is always specified first, contains and expression representing the dependent and independent variables to be used.</p>
 <p>The dependent variable is specified first, and there will only be one of them and then after the <code>~</code> character we specified the independent variables that we want to be included in the model. In our case we only had the possibility of one (x), but in more realistic cases we would list the independent variable of interest by using the <code>+</code> operator. e.g. <code>y ~ x + a + b + c</code>. If we wanted to include all of the variables in the dataframe, we could use the shorthand notation of <code>.</code> <a href="http://e.eg">e.eg</a>. <code>y ~ .</code>.</p>
 <p>In more realistic scenarios, it may be that you want to include some interaction variables, (algerbraic combinations of existing variables) into your model. In these cases, you could create the interaction terms as ne variable in the data frame in advance, or you could specify them directly using the <code>I</code> function.</p>
@@ -377,7 +376,7 @@ summary<span class="token punctuation">(</span>model<span class="token punctuati
 model <span class="token operator">&lt;-</span> lm<span class="token punctuation">(</span>y<span class="token operator">~</span>x <span class="token operator">+</span> I<span class="token punctuation">(</span>x<span class="token operator">*</span>x<span class="token punctuation">)</span> <span class="token operator">+</span> I<span class="token punctuation">(</span>log<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> data<span class="token operator">=</span>df_temps<span class="token punctuation">)</span>
 summary<span class="token punctuation">(</span>model<span class="token punctuation">)</span>
 </pre><p><strong>Output from <code>summary</code></strong></p>
-<p><img src="fig%5Csummary2.jpg" alt="FC Plot 1"></p>
+<p><img src="./fig/summary2.jpg" alt="Summary 2"></p>
 <h3 class="mume-header" id="the-summary-information">The summary information</h3>
 
 <p>The output from the summary function provides us with key information about the model which has been created.</p>
@@ -402,13 +401,13 @@ residuals <span class="token operator">&lt;-</span> resid<span class="token punc
   geom_hline<span class="token punctuation">(</span>yintercept<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> colour<span class="token operator">=</span><span class="token string">&apos;blue&apos;</span><span class="token punctuation">)</span> <span class="token operator">+</span>
   scale_y_continuous<span class="token punctuation">(</span>limits <span class="token operator">=</span> c<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token comment">#  scale_y_continuous(limits = c(-2.0e-13, 2.0e-13))</span>
-</pre><p><img src="fig%5Cresids1.png" alt="Residuals 1"></p>
+</pre><p><img src="./fig/resids1.png" alt="Residuals 1"></p>
 <p>In this plot we explicitly specified the range of the y-axis. The result is that all of the residuals appear to be 0, which given our <code>perfect</code> relationship is what we would expect. But we already know from the summary information that this isn&apos;t the case.</p>
 <h2 class="mume-header" id="exercise">Exercise</h2>
 
 <p>Change the y-axis scale to the commented out line above and see what the plot looks like.</p>
 <p>Even though we started with a perfect set of data, our model has introduced errors in the predicted values of the dependent variable, albeit in this case extremely small.</p>
-<p><img src="fig%5Cresids1ex.png" alt="Residuals 1"></p>
+<p><img src="./fig/resids1ex.png" alt="Residuals 1ex"></p>
 <h2 class="mume-header" id="breaking-our-model">Breaking our model</h2>
 
 <p>Now that we know what a perfect model looks like, we are going to break it slightly.</p>
@@ -421,12 +420,12 @@ df_temps2 <span class="token operator">&lt;-</span> data.frame<span class="token
 ggplot<span class="token punctuation">(</span>df_temps2<span class="token punctuation">,</span> aes<span class="token punctuation">(</span>x<span class="token operator">=</span>x<span class="token punctuation">,</span> y<span class="token operator">=</span>y<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> 
   geom_point<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span>
   geom_line<span class="token punctuation">(</span><span class="token punctuation">)</span>
-</pre><p><img src="fig%5CFC_plot4.png" alt="FC_plot4"></p>
+</pre><p><img src="./fig/FC_plot4.png" alt="FC_plot4"></p>
 <p>This time the  line is not so straight! So, we need to we need to add a regression line produced from <code>geom_smooth</code> as we did before.</p>
 <pre data-role="codeBlock" data-info="r" class="language-r">ggplot<span class="token punctuation">(</span>df_temps2<span class="token punctuation">,</span> aes<span class="token punctuation">(</span>x<span class="token operator">=</span>x<span class="token punctuation">,</span> y<span class="token operator">=</span>y<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> 
   geom_point<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span>
   geom_smooth<span class="token punctuation">(</span>method<span class="token operator">=</span><span class="token string">&apos;lm&apos;</span><span class="token punctuation">,</span>formula<span class="token operator">=</span>y<span class="token operator">~</span>x<span class="token punctuation">)</span>
-</pre><p><img src="fig%5CFC_plot5.png" alt="FC_plot5"></p>
+</pre><p><img src="./fig/FC_plot5.png" alt="FC_plot5"></p>
 <p>Notice that in addition to the line itself, we also get a shaded area representing the 95% confidence level. You can control this with parameter settings if you want.</p>
 <p>Now we want to create a new model and look at the summary information</p>
 <pre data-role="codeBlock" data-info="r" class="language-r"><span class="token comment"># create a new model and see what it looks like</span>
@@ -461,7 +460,7 @@ ggplot<span class="token punctuation">(</span>df_resid2<span class="token punctu
   geom_point<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span>
   geom_hline<span class="token punctuation">(</span>yintercept<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> colour<span class="token operator">=</span><span class="token string">&apos;blue&apos;</span><span class="token punctuation">)</span> 
 
-</pre><p><img src="fig%5Cresids2.png" alt="resids2"></p>
+</pre><p><img src="./fig/resids2.png" alt="resids2"></p>
 <p>This is type of residual plot we are hoping for. The points evenly but randomly distributed either side of the 0-line.</p>
 <h2 class="mume-header" id="exercise-1">Exercise</h2>
 
@@ -512,10 +511,10 @@ Multiple R-squared:  0.957,	Adjusted R-squared:  0.9565
 F-statistic:  2179 on 1 and 98 DF,  p-value: &lt; 2.2e-16
 </code></pre><p>The model looks pretty good.</p>
 <p>Now lets look at the plots.</p>
-<p><img src="fig%5CFC_plot6.png" alt="FC_pot6"></p>
+<p><img src="./fig/FC_plot6.png" alt="FC_pot6"></p>
 <p>If you look at this plot carefully , you will notice that as x (and hence y) increases, then the points are a greater distance from the line. The is known as Homoscedasticity and is to be avoided in models.</p>
 <p>If you look at the residuals plot the effect is equally noticeable.</p>
-<p><img src="fig%5Cresids3.png" alt="resids3"></p>
+<p><img src="./fig/resids3.png" alt="resids3"></p>
 <p>The point ot be made here is that the first graph can only be shown because we have the trivial case of a single independent variable. If you had two, you might try a 3-d graph, but spotting Homoscedasticity in it could be difficult. For 3 or more independent variables, you wouldn&apos;t be able to draw a graph at all.</p>
 <p>Hover, regardless of the number of independent variables, you will always be able to produce the residuals graph.</p>
 <p>non-Homoscedasticity is in fact just one of several assumption that we need to make when dealing with linear regression models. The complete list include;</p>

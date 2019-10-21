@@ -313,11 +313,12 @@ dir.create<span class="token punctuation">(</span><span class="token string">&qu
 dir.create<span class="token punctuation">(</span><span class="token string">&quot;fig_output&quot;</span><span class="token punctuation">)</span>
 </pre><h3 class="mume-header" id="getting-the-data-we-are-going-to-use">Getting the data we are going to use</h3>
 
-<p>[Add text here on data location and details of what the data is]</p>
-<p>[Point out that data can often be downloaded  directly and that RStudion has functionality  to download datafiles]</p>
+<p>In this workshop we will be using the SAFI_clean dataset. You can download this from the link on the contents page.</p>
+<p>R does have a download function as shown here. Here we are specifying the version of the dataset which resides of figshare.</p>
 <pre data-role="codeBlock" data-info="r" class="language-r">download.file<span class="token punctuation">(</span><span class="token string">&quot;https://ndownloader.figshare.com/files/11492171&quot;</span><span class="token punctuation">,</span>
               <span class="token string">&quot;data/SAFI_clean.csv&quot;</span><span class="token punctuation">,</span> mode <span class="token operator">=</span> <span class="token string">&quot;wb&quot;</span><span class="token punctuation">)</span>
-</pre><h2 class="mume-header" id="interacting-with-r">Interacting with R</h2>
+</pre><p>Alternatively you can use RStudio.</p>
+<h2 class="mume-header" id="interacting-with-r">Interacting with R</h2>
 
 <p>The basis of programming is that we write down instructions for the computer to follow, and then we tell the computer to follow those instructions. We write, or <em>code</em>, instructions in R because it is a common language that both the computer and we can understand. We call the instructions <em>commands</em> and we tell the computer to follow the instructions by <em>executing</em> (also called <em>running</em>) those commands.</p>
 <p>There are two main ways of interacting with R: by using the console or by using script files (plain text files that contain your code). The console pane (in RStudio, the bottom left panel) is the place where commands written in the R language can be typed and executed immediately by the computer. It is also where the results will be shown for commands that have been executed. You can type commands directly into the console and press <kbd>Enter</kbd> to execute those commands, but they will be forgotten when you close the session.</p>
