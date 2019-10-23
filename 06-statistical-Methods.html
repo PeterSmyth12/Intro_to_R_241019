@@ -264,19 +264,20 @@ pre[data-line] .line-highlight[data-end]:after {
       <div class="mume markdown-preview  ">
       <h1 class="mume-header" id="introduction-to-statistical-methods-with-r">Introduction to Statistical Methods with R</h1>
 
-<p>In this session we will look at a couple of statistical methods namely; Linear Regression and Decision trees.</p>
-<p>These are examples only using the builtin datasets which accompany all R installations. As far a s possible we will not deal with any of the mathematics or theory of these techniques, rather we will simply build up examples and provide indications of R functions available to analyse the resulting models with a view t deciding how &apos;good&apos; they are.</p>
-<h2 class="mume-header" id="rs-builtin-datasets-and-other-sources">R&apos;s builtin datasets and other sources</h2>
+<p>In this session we will look at simple Linear Regression.</p>
+<p>There are many builtin datasets (based on real data) which accompany all R installations which can be used to create linear models. You may want to look at some of them to practice on after the lesson.</p>
+<h3 class="mume-header" id="rs-builtin-datasets-and-other-sources">R&apos;s builtin datasets and other sources</h3>
 
 <p>You can get a list of the builtin datasets in R by typing the following command into the console</p>
 <pre data-role="codeBlock" data-info="r" class="language-r">datasets<span class="token punctuation">(</span><span class="token punctuation">)</span>
 </pre><p>The start of the output looks like this.</p>
 <p><img src="./fig/datasets.png" alt="R builtin datasets"></p>
 <p>There are about 50 of them.</p>
-<p>There are seveeral online repositories which hold large collectins of open source (free to use, with appropriate citation) datasets. Two of the more popular are;</p>
+<p>There are also several online repositories which hold large collectins of open source (free to use, with appropriate citation) datasets. Two of the more popular are;</p>
 <p><a href="https://www.kaggle.com/datasets">Kaggle</a><br>
 and<br>
 <a href="https://archive.ics.uci.edu/ml/datasets.php">UCI Machine Learning Repository</a></p>
+<p>For this lesson we aree goingto create our own dataset.</p>
 <h2 class="mume-header" id="linear-regression">Linear Regression</h2>
 
 <p>In linear regression we are going to try to predict values for a dependent variable, usually referred to as <code>y</code> based on the values of a set of predictor or independent variables denoted by the <code>x</code>s. the <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>&#x3B2;</mi></mrow><annotation encoding="application/x-tex">\beta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05278em;">&#x3B2;</span></span></span></span>&apos;s represent &apos;weightings&apos; on the x values which have been determined by the creation of the model. The <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>&#x3F5;</mi></mrow><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">&#x3F5;</span></span></span></span> represents the error.</p>
@@ -396,7 +397,9 @@ summary<span class="token punctuation">(</span>model<span class="token punctuati
 <pre data-role="codeBlock" data-info="r" class="language-r"><span class="token comment"># get the residuals</span>
 residuals <span class="token operator">&lt;-</span> resid<span class="token punctuation">(</span>model<span class="token punctuation">)</span>
 </pre><p>We can now create a dataframe of the residuals and the original dependent variable values and plot them in a scatter plot.</p>
-<pre data-role="codeBlock" data-info="r" class="language-r">ggplot<span class="token punctuation">(</span>df_resid<span class="token punctuation">,</span> aes<span class="token punctuation">(</span>x<span class="token operator">=</span>dependent_variable<span class="token punctuation">,</span> y<span class="token operator">=</span>Residuals<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> 
+<pre data-role="codeBlock" data-info="r" class="language-r">df_resid <span class="token operator">&lt;-</span> data.frame<span class="token punctuation">(</span>Residuals<span class="token operator">=</span>residuals<span class="token punctuation">,</span> dependent_variable<span class="token operator">=</span>fahrenheit_selection<span class="token punctuation">)</span>
+
+ggplot<span class="token punctuation">(</span>df_resid<span class="token punctuation">,</span> aes<span class="token punctuation">(</span>x<span class="token operator">=</span>dependent_variable<span class="token punctuation">,</span> y<span class="token operator">=</span>Residuals<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> 
   geom_point<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span>
   geom_hline<span class="token punctuation">(</span>yintercept<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> colour<span class="token operator">=</span><span class="token string">&apos;blue&apos;</span><span class="token punctuation">)</span> <span class="token operator">+</span>
   scale_y_continuous<span class="token punctuation">(</span>limits <span class="token operator">=</span> c<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
@@ -512,7 +515,7 @@ F-statistic:  2179 on 1 and 98 DF,  p-value: &lt; 2.2e-16
 </code></pre><p>The model looks pretty good.</p>
 <p>Now lets look at the plots.</p>
 <p><img src="./fig/FC_plot6.png" alt="FC_pot6"></p>
-<p>If you look at this plot carefully , you will notice that as x (and hence y) increases, then the points are a greater distance from the line. The is known as Homoscedasticity and is to be avoided in models.</p>
+<p>If you look at this plot carefully, you will notice that as x (and hence y) increases, then the points are a greater distance from the line. The is known as <em>Homoscedasticity</em> and is one of several things to be avoided in linear models.</p>
 <p>If you look at the residuals plot the effect is equally noticeable.</p>
 <p><img src="./fig/resids3.png" alt="resids3"></p>
 <p>The point ot be made here is that the first graph can only be shown because we have the trivial case of a single independent variable. If you had two, you might try a 3-d graph, but spotting Homoscedasticity in it could be difficult. For 3 or more independent variables, you wouldn&apos;t be able to draw a graph at all.</p>
